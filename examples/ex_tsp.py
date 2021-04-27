@@ -1,7 +1,8 @@
 import random
 
 import dimod
-import optneal as opn
+
+from optneal import Cost, Penalty, MultiIndex
 
 
 def gen_random_cost(N, start_idx):
@@ -21,20 +22,22 @@ def main():
     N = 4
     shape = (N, N)
     cost_dict = gen_random_cost(N, start_idx=0)
-    cost = opn.Cost(cost_dict, shape)
+    cost = Cost(cost_dict, shape)
 
     constraints = [({(i, t): 1 for t in range(N)}, 1) for i in range(N)]
     constraints += [({(i, t): 1 for i in range(N)}, 1) for t in range(N)]
-    penalty = opn.Penalty(constraints, shape)
+    penalty = Penalty(constraints, shape)
 
     lam = 10.0
     cost_func = cost + lam * penalty
     bqm = cost_func.to_dimod_bqm()
 
+    cost_func.show_qubo()
+
     solver = dimod.ExactSolver()
     results = solver.sample(bqm)
 
-    mi = opn.MultiIndex(shape)
+    mi = MultiIndex(shape)
     for sample in results.lowest().samples():
         print({mi.unravel(k): v for k, v in sample.items() if v == 1})
 
