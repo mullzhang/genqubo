@@ -1,0 +1,1 @@
+{"type": "BinaryQuadraticModel", "version": {"bqm_schema": "3.0.0"}, "use_bytes": false, "index_type": "uint16", "bias_type": "float32", "num_variables": 2, "num_interactions": 1, "variable_labels": [0, 1], "variable_type": "BINARY", "offset": 0.0, "info": {}, "linear_biases": [0.0, 0.0], "quadratic_biases": [1.0], "quadratic_head": [0], "quadratic_tail": [1]}
