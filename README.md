@@ -4,6 +4,7 @@ Optneal is a Python module for mathematical optimization using annealing and LP 
 
 - Typical transformation of cost function and constraints to unconstrained form.
 - Useful functions for Binary Unconstrained Model(BQM).
+- Leap Hybrid DQM Sampler acceptable for BQM.
 
 ## install
 
