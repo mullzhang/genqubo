@@ -57,7 +57,13 @@ class LeapHybridDQMSampler(_LeapHybridDQMSampler, dimod.Sampler):
 
         """
         dqm = bqm_to_dqm(bqm)
-        sampleset = self.sample_dqm(
+        sampleset_disc = self.sample_dqm(
             dqm, time_limit, compress, compressed, **kwargs
+        )
+
+        # change vartype
+        sampleset = dimod.SampleSet.from_samples(
+            sampleset_disc.record.sample, bqm.vartype, sampleset_disc.record.energy,
+            sampleset_disc.info, sampleset_disc.record.num_occurrences
         )
         return sampleset
