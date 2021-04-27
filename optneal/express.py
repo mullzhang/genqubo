@@ -100,21 +100,3 @@ class Penalty(Express):
         self.coeffs, self.consts = const_to_coeff(constrs, shape)
         mat, offset = convert_to_penalty(self.coeffs, self.consts)
         super(Penalty, self).__init__(mat, offset)
-
-
-class Lagrange(Express):
-    def __init__(self, constrs, multp, shape):
-        F, C = const_to_coeff(constrs, shape)
-
-        if isinstance(multp, np.ndarray):
-            self.multp = multp
-        elif isinstance(multp, list):
-            self.multp = np.array(multp)
-        elif isinstance(multp, numbers.Real):
-            self.multp = np.ones(len(C)) * multp
-        else:
-            raise ValueError('multp must be numpy.ndarray, list or real number')
-
-        mat = np.diag(np.dot(self.multp, F))
-        offset = np.dot(self.multp, C)
-        super(Lagrange, self).__init__(mat, offset)
