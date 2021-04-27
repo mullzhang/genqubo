@@ -9,11 +9,12 @@ def read_requirements():
     return requirements
 
 
+description = 'Python library for mathematical optimization using annealing and LP solvers.'
+
 setup(
     name='optneal',
-    version='0.0.6',
-    description='Generate QUBO matrix from constraints',
-    long_description='README.md',
+    version='0.0.7',
+    description=description, long_description='README.md',
     author='Mull Zhang',
     install_requires=['dimod', 'numpy'],
     url='https://github.com/mullzhang/optneal',
